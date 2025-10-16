@@ -8,16 +8,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.priyanshu.energy.monitoring.dto.meter.MeterCreateDTO;
-import com.priyanshu.energy.monitoring.dto.meter.MeterDTO;
 import com.priyanshu.energy.monitoring.dto.userdto.CustomerCreateDTO;
 import com.priyanshu.energy.monitoring.dto.userdto.CustomerDTO;
 import com.priyanshu.energy.monitoring.dto.userdto.UserDTO;
 import com.priyanshu.energy.monitoring.entity.meter.MeterEntity;
-import com.priyanshu.energy.monitoring.entity.user.AdminEntity;
 import com.priyanshu.energy.monitoring.entity.user.CustomerEntity;
 import com.priyanshu.energy.monitoring.entity.user.UserEntity;
 import com.priyanshu.energy.monitoring.repository.meter.MeterRepository;
-import com.priyanshu.energy.monitoring.repository.user.AdminRepository;
 import com.priyanshu.energy.monitoring.repository.user.CustomerRepository;
 import com.priyanshu.energy.monitoring.repository.user.UserRepository;
 
@@ -159,7 +156,7 @@ public class CustomerService {
 
         }
 
-        private CustomerDTO mapToDTO(CustomerEntity customer) {
+        public CustomerDTO mapToDTO(CustomerEntity customer) {
                 return new CustomerDTO(
                                 customer.getId(),
                                 customer.getPhoneNumber(),

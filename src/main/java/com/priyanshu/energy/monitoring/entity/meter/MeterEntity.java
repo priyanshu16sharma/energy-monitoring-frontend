@@ -2,16 +2,20 @@ package com.priyanshu.energy.monitoring.entity.meter;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.priyanshu.energy.monitoring.entity.billing.BillingEntity;
 import com.priyanshu.energy.monitoring.entity.user.CustomerEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
@@ -37,6 +41,9 @@ public class MeterEntity {
     @OneToOne
     @JoinColumn(name = "customer_id", nullable = false, unique = true)
     private CustomerEntity customer;
+
+    @OneToMany(mappedBy = "meter", fetch = FetchType.LAZY)
+    private List<BillingEntity> bills;
 
     @Column(name = "created_at", nullable = false, columnDefinition = "TIMESTAMP")
     private LocalDateTime createdAt;

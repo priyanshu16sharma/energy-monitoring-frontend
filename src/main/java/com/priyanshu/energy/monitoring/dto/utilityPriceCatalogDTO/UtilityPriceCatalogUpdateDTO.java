@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Digits;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,7 +17,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UtilityPriceCatalogUpdateDTO {
 
-    @NotBlank(message = "Id is required for making updates")
     private String id;
 
     @Size(min = 6, max = 6, message = "Pincode must be 6 characters long")

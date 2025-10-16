@@ -41,11 +41,11 @@ public class SecurityConfig {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**") // allow all endpoints
-                        .allowedOrigins("*") // allow all origins
-                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // allow all methods
-                        .allowedHeaders("*") // allow all headers
-                        .allowCredentials(false); // set to true only if you use cookies/sessions across domains
+                registry.addMapping("/**")
+                        .allowedOrigins("*")
+                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                        .allowedHeaders("*")
+                        .allowCredentials(false);
             }
         };
     }

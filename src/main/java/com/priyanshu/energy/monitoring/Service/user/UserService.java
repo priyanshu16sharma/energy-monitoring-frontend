@@ -1,24 +1,17 @@
 package com.priyanshu.energy.monitoring.Service.user;
 
-import java.time.LocalDateTime;
-
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+
 import org.springframework.stereotype.Service;
 
+import com.priyanshu.energy.monitoring.Service.jwtService.JWTService;
 import com.priyanshu.energy.monitoring.dto.auto.LoginRequestDTO;
-import com.priyanshu.energy.monitoring.dto.userdto.AdminDTO;
 import com.priyanshu.energy.monitoring.dto.userdto.UserDTO;
-import com.priyanshu.energy.monitoring.entity.user.AdminEntity;
 import com.priyanshu.energy.monitoring.entity.user.UserEntity;
-import com.priyanshu.energy.monitoring.repository.user.AdminRepository;
-import com.priyanshu.energy.monitoring.repository.user.CustomerRepository;
 import com.priyanshu.energy.monitoring.repository.user.UserRepository;
 
-import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
@@ -26,11 +19,13 @@ import lombok.extern.slf4j.Slf4j;
 public class UserService {
     private final UserRepository userRepository;
     private final AuthenticationManager authenticationManager;
+    private final JWTService jwtService;
 
-    public UserService(UserRepository userRepository, AuthenticationManager authenticationManager) {
+    public UserService(UserRepository userRepository, AuthenticationManager authenticationManager,
+            JWTService jwtService) {
         this.userRepository = userRepository;
         this.authenticationManager = authenticationManager;
-
+        this.jwtService = jwtService;
     }
 
     public String verifyUsers(LoginRequestDTO data) {
@@ -38,7 +33,7 @@ public class UserService {
                 new UsernamePasswordAuthenticationToken(data.getEmail(), data.getPassword()));
 
         if (auth.isAuthenticated()) {
-            return "Success";
+            return jwtService.generateToken(auth.getName());
         }
 
         return "fail";
