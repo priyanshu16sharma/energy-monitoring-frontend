@@ -13,20 +13,20 @@ import com.priyanshu.energy.monitoring.entity.billing.BillingEntity;
 @Repository
 public interface BillingRepository extends JpaRepository<BillingEntity, String> {
 
-    List<BillingEntity> findByStatus(String status);
+  List<BillingEntity> findByStatus(String status);
 
-    List<BillingEntity> findAllByMeterIdOrderByCreatedAtDesc(String meterId);
+  List<BillingEntity> findAllByMeterIdOrderByCreatedAtDesc(String meterId);
 
-    List<BillingEntity> findAllByOrderByCreatedAtDesc();
+  List<BillingEntity> findAllByOrderByCreatedAtDesc();
 
-    BillingEntity findTopByMeterIdOrderByCreatedAtDesc(String meterId);
+  BillingEntity findTopByMeterIdOrderByCreatedAtDesc(String meterId);
 
-    @Query("""
-            SELECT COALESCE(SUM(b.totalAmount), 0)
-            FROM BillingEntity b
-            WHERE b.meter.id = :meterId
-              AND LOWER(b.status) = LOWER(:status)
-            """)
-    BigDecimal findTotalAmountByMeterIdAndStatus(@Param("meterId") String meterId, @Param("status") String status);
+  @Query("""
+      SELECT COALESCE(SUM(b.totalAmount), 0)
+      FROM BillingEntity b
+      WHERE b.meter.id = :meterId
+        AND LOWER(b.status) = LOWER(:status)
+      """)
+  BigDecimal findTotalAmountByMeterIdAndStatus(@Param("meterId") String meterId, @Param("status") String status);
 
 }

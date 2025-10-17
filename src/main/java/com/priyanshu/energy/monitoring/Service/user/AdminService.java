@@ -100,7 +100,7 @@ public class AdminService {
 
     }
 
-    private AdminDTO mapToDTO(AdminEntity admin) {
+    public AdminDTO mapToDTO(AdminEntity admin) {
         return new AdminDTO(
                 admin.getId(),
                 admin.getAssignedPincode(),

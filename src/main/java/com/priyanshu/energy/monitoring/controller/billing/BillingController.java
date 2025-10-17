@@ -33,6 +33,7 @@ public class BillingController {
                     billData.getCalcTo(), billData.getTotalUnits());
             return ResponseEntity.status(HttpStatus.OK).body(bill);
         } catch (Exception e) {
+            System.out.println(e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
     }

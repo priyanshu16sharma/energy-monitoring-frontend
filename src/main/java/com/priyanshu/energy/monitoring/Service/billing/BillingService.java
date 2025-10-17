@@ -143,7 +143,7 @@ public class BillingService {
 
             BigDecimal baseAmount = units.multiply(ratePerUnit);
             BigDecimal fixedProrated = fixedCharge.multiply(fraction);
-            BigDecimal fppaProrated = fppa.multiply(fraction);
+            BigDecimal fppaProrated = units.multiply(fppa);
             BigDecimal taxAmount = baseAmount.multiply(taxPercent.divide(BigDecimal.valueOf(100)));
 
             sumBase = sumBase.add(baseAmount);
